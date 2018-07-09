@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { TextInput } from './lib'
+import { Form } from './lib'
 
 const App = () => (
-  <TextInput label="Email Address" placeholder="name@example.com" />
+  <Form />
 )
 
 render(<App />, document.getElementById('root'))

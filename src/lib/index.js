@@ -1,3 +1,3 @@
-import TextInput from './TextInput'
+import Form from './Form/Form'
 
-export { TextInput }
+export { Form }
