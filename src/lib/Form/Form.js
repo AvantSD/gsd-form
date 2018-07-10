@@ -1,47 +1,54 @@
 import React, { Component } from 'react'
-import { withFormik } from 'formik'
+import { Formik } from 'formik'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Fields } from '../Fields'
 import schema from '../validate'
 
 // TODO: REMOVER
 const json = {
-  email: {
-    label: 'E-mail',
-    component: 'input',
-    type: 'email',
-    name: 'email',
-    value: 'teste@email.com',
-    validate: [
-      'string',
-      ['email', 'E-mail inválido'],
-      'required'
-    ],
+  form: {
+    email: {
+      label: 'E-mail',
+      component: 'input',
+      type: 'email',
+      name: 'email',
+      value: 'teste@email.com',
+      validate: [
+        'string',
+        ['email', 'E-mail inválido'],
+        'required'
+      ],
+    },
+    phone: {
+      label: 'Telefone',
+      component: 'input',
+      type: 'text',
+      name: 'phone',
+      value: '',
+      validate: [
+        'string',
+        ['max', 15],
+        ['min', 3],
+        'required'
+      ],
+    },
+    subject: {
+      label: 'Assunto',
+      component: 'select',
+      name: 'subject',
+      value: 'Elegios',
+      options: ['', 'Elegios', 'Dúvidas'],
+      validate: [
+        'string',
+        'required'
+      ],
+    },
   },
-  phone: {
-    label: 'Telefone',
-    component: 'input',
-    type: 'text',
-    name: 'phone',
-    value: '',
-    validate: [
-      'string',
-      ['max', 15],
-      ['min', 3],
-      'required'
-    ],
+  recaptcha: {
+    size: 'invisible',
+    sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
   },
-  subject: {
-    label: 'Assunto',
-    component: 'select',
-    name: 'subject',
-    value: '',
-    options: ['', 'Elegios', 'Dúvidas'],
-    validate: [
-      'string',
-      'required'
-    ],
-  }
 }
 
 // TODO: REMOVER
@@ -71,56 +78,85 @@ const formInitialValues = data =>
     [item]: data[item].value
   }), {})
 
-const InnerForm = props => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-    data
-  } = props
-  return (
-    <form onSubmit={handleSubmit}>
-      {
-        formatData(data).map((item, key) =>
-          <Fields
-            key={key}
-            data={item}
-            value={values[item.field]}
-            errors={touched[item.field] && errors[item.field]}
-            handleChange={handleChange}
-            handleBlur={handleBlur}
+class InnerForm extends Component {
+
+  onSubmit (e) {
+    e.preventDefault()
+    if (this.refs.recaptcha) {
+      this.refs.recaptcha.execute()
+    } else if (!this.props.data.recaptcha) {
+      this.props.submitForm()
+    }
+  }
+
+  formatValuesSubmit (recaptcha) {
+    const params = {
+      ...this.props.values,
+      recaptcha,
+    }
+    this.props.setValues(params)
+    this.props.submitForm()
+    this.refs.recaptcha.reset()
+  }
+
+  render() {
+    const {
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+      isSubmitting,
+      data
+    } = this.props
+
+    return (
+      <form>
+        {
+          formatData(data.form).map((item, key) =>
+            <Fields
+              key={key}
+              data={item}
+              value={values[item.field]}
+              errors={touched[item.field] && errors[item.field]}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
+          )
+        }
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          onClick={e => this.onSubmit(e)}
+        >
+          Submit
+        </button>
+        {
+          data.recaptcha && data.recaptcha.sitekey &&
+          <ReCAPTCHA
+            ref="recaptcha"
+            size={data.recaptcha.size || 'invisible'}
+            sitekey={data.recaptcha.sitekey}
+            onChange={captcha => this.formatValuesSubmit(captcha)}
           />
-        )
-      }
+        }
 
-      <button type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-
-      {/* // TODO: REMOVER */}
-      <DisplayFormikState {...props} />
-    </form>
-  )
+        {/* // TODO: REMOVER */}
+        <DisplayFormikState {...this.props} />
+      </form>
+    )
+  }
 }
 
-const MyForm = withFormik({
-  mapPropsToValues: ({ data }) => ({ ...formInitialValues(data) }),
-  validationSchema: ({ data }) => schema(data),
-  handleSubmit: (
-    values,
-    {
-      props,
-      setSubmitting,
-      setErrors,
-    }
-  ) => {
-    console.log(values)
-  },
-})(InnerForm)
+const MyForm = ({ data }) => (
+  <Formik
+    initialValues={{ ...formInitialValues(data.form) }}
+    validationSchema={schema(data.form)}
+    onSubmit={values => console.log(1, values)}
+    render={props => <InnerForm data={data} {...props} />}
+  />
+)
 
 class GsdForm extends Component {
   render() {
