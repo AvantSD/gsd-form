@@ -146,19 +146,24 @@ class InnerForm extends Component {
   }
 }
 
-const MyForm = ({ data }) => (
+const MyForm = ({ data, handleSubmit }) => (
   <Formik
     initialValues={{ ...formInitialValues(data.form) }}
     validationSchema={schema(data.form)}
-    onSubmit={values => console.log('onSubmit', values)}
+    onSubmit={values => handleSubmit(values)}
     render={props => <InnerForm data={data} {...props} />}
   />
 )
 
 class GsdForm extends Component {
+
+  handleSubmit (value) {
+    console.log('onSubmit', value)
+  }
+
   render() {
     return (
-      <MyForm data={json} />
+      <MyForm data={json} handleSubmit={this.handleSubmit} />
     )
   }
 }
