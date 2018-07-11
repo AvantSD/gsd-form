@@ -26,6 +26,7 @@ const json = {
       type: 'text',
       name: 'phone',
       value: '',
+      format: 'phone',
       validate: [
         'string',
         ['max', 15],
@@ -104,8 +105,6 @@ class InnerForm extends Component {
       values,
       errors,
       touched,
-      handleChange,
-      handleBlur,
       isSubmitting,
       data
     } = this.props
@@ -116,15 +115,13 @@ class InnerForm extends Component {
           formatData(data.form).map((item, key) =>
             <Fields
               key={key}
-              data={item}
+              item={item}
               value={values[item.field]}
-              errors={touched[item.field] && errors[item.field]}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
+              error={touched[item.field] && errors[item.field]}
+              {...this.props}
             />
           )
         }
-
         <button
           type="submit"
           disabled={isSubmitting}
@@ -153,7 +150,7 @@ const MyForm = ({ data }) => (
   <Formik
     initialValues={{ ...formInitialValues(data.form) }}
     validationSchema={schema(data.form)}
-    onSubmit={values => console.log(1, values)}
+    onSubmit={values => console.log('onSubmit', values)}
     render={props => <InnerForm data={data} {...props} />}
   />
 )
