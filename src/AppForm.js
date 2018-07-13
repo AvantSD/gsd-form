@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import locale from './locale'
 
 import { GsdForm } from './lib'
+import './lib/css/style.css'
 
 const json = {
   form: {
@@ -52,6 +53,16 @@ const json = {
       options: [],
       placeholder: 'Selecione um estado',
       noOptionsMessage: 'Nenhum estado encontrado',
+      validate: [
+        'string',
+        'required'
+      ],
+    },
+    message: {
+      label: 'Mensagem',
+      component: 'textarea',
+      name: 'message',
+      value: 'Lorem ipsum',
       validate: [
         'string',
         'required'

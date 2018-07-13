@@ -8,6 +8,7 @@ yarn add gsd-form
 ## Usando no projeto
 ```jsx
 import GsdForm from 'gsd-form'
+import 'gsd-form/style.css' // Opcional
 
 class App extends Component {
   render() {

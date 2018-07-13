@@ -1,0 +1,73 @@
+*,
+::after,
+::before {
+  box-sizing: border-box
+}
+
+.gsd-form {
+  width: 100%;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Fira Sans, Ubuntu, Oxygen, Oxygen Sans, Cantarell, Droid Sans, Apple Color Emoji, Segoe UI Emoji, Segoe UI Emoji, Segoe UI Symbol, Lucida Grande, Helvetica, Arial, sans-serif;
+}
+
+.gsd-form-field {
+  margin-bottom: 10px;
+}
+
+.gsd-form-field label {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.gsd-form-field input,
+.gsd-form-field textarea {
+  font-size: 16px;
+  outline: 0 !important;
+}
+
+.gsd-form-field input[type="text"],
+.gsd-form-field input[type="number"],
+.gsd-form-field input[type="email"],
+.gsd-form-field textarea {
+  padding: 8px;
+  width: 100%;
+  border: 1px solid hsl(0,0%,80%);
+  box-shadow: none;
+}
+.gsd-form-field textarea {
+  height: 100px;
+}
+
+.gsd-form-field .gsd-form-select-wrap .gsd-form-select__control {
+  background-color: white;
+  border-radius: 0;
+}
+
+.gsd-form-field .gsd-form-select-wrap .gsd-form-select__control.gsd-form-select__control--is-focused {
+  border-color: hsl(0,0%,80%);
+  box-shadow: none
+}
+
+.gsd-form-button {
+  padding: 9px 20px;
+  border-radius: 0;
+  font-size: 16px;
+  background: none;
+}
+
+.gsd-form-feedback {
+  color: #f44336;
+}
+
+.gsd-form-field label.gsd-form-error {
+  color: #f44336;
+}
+.gsd-form-field input.gsd-form-error,
+.gsd-form-field textarea.gsd-form-error {
+  border: 1px solid #f44336;
+}
+
+.gsd-form-field .gsd-form-select-wrap.gsd-form-error .gsd-form-select__control {
+  border: 1px solid #f44336;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Feedback = ({ errors }) => (
   errors
-    ? <span className="feedback">{ errors }</span>
+    ? <span className="gsd-form-feedback">{ errors }</span>
     : null
 )
 

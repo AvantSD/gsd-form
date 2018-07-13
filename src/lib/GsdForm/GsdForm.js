@@ -63,7 +63,7 @@ class InnerForm extends Component {
     } = this.props
 
     return (
-      <form>
+      <form className="gsd-form">
         {
           formatData(data.form).map((item, key) =>
             <FieldComponent
@@ -76,6 +76,7 @@ class InnerForm extends Component {
           )
         }
         <button
+          className="gsd-form-button"
           type="submit"
           disabled={isSubmitting}
           onClick={e => this.onSubmit(e)}

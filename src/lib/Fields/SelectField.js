@@ -5,6 +5,7 @@ const SelectField = props => {
   const {
     value,
     onChanges,
+    error,
     item: {
       name,
       options,
@@ -14,8 +15,8 @@ const SelectField = props => {
   } = props
   return (
     <Select
-      className="select-wrap"
-      classNamePrefix="select"
+      className={`gsd-form-select-wrap ${error ? 'gsd-form-error' : ''}`}
+      classNamePrefix="gsd-form-select"
       placeholder={placeholder}
       noOptionsMessage={() => noOptionsMessage}
       name={name}

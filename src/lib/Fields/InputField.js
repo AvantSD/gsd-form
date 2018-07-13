@@ -2,9 +2,10 @@ import React from 'react'
 import { Field } from 'formik'
 
 const InputField = props => {
-  const { value, onChanges, item: { component, type, name } } = props
+  const { value, error, onChanges, item: { component, type, name } } = props
   return (
     <Field
+      className={error ? 'gsd-form-error' : ''}
       component={component}
       type={type}
       name={name}
