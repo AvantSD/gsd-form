@@ -1,5 +1,5 @@
-import Fields from './Fields'
+import FieldComponent from './FieldComponent'
 
 export {
-  Fields,
+  FieldComponent,
 }

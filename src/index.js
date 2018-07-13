@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Form } from './lib'
+import AppForm from './AppForm'
 
 const App = () => (
-  <Form />
+  <AppForm />
 )
 
 render(<App />, document.getElementById('root'))

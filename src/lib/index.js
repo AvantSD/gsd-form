@@ -1,3 +1,3 @@
-import Form from './Form/Form'
+import GsdForm from './GsdForm/GsdForm'
 
-export { Form }
+export { GsdForm }

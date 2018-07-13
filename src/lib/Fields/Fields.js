@@ -1,51 +1,25 @@
 import React, { Component } from 'react'
-import { Field } from 'formik'
 
-import Feedback from '../Feedback/Feedback'
-import formats from '../format'
+import InputField from './InputField'
+import SelectField from './SelectField'
 
 class Fields extends Component {
 
-  handleChange (e) {
-    const { setFieldValue, item: { name, format } } = this.props
-    const value = format ? formats[format](e.target.value) : e.target.value
-    setFieldValue(name, value)
+  constructor (props) {
+    super(props)
+    switch (props.item.component) {
+      case 'select':
+        this.component = SelectField
+        break
+      default:
+        this.component = InputField
+        break
+    }
   }
 
   render() {
-    const {
-      value,
-      error,
-      item: {
-        label,
-        component,
-        type,
-        name,
-        options,
-      },
-    } = this.props
-
-    return (
-      <div className="field-group">
-        <label>{ label }</label>
-        <Field
-          component={component}
-          type={type}
-          name={name}
-          onChange={e => this.handleChange(e)}
-          value={value}
-        >
-          {
-            component === 'select'
-              ? options.map((item, key) =>
-                <option value={item} key={key}>{ item }</option>
-              )
-              : null
-          }
-        </Field>
-        <Feedback errors={error} />
-      </div>
-    )
+    const Component = this.component
+    return <Component {...this.props} />
   }
 }
 

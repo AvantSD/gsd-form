@@ -2,55 +2,8 @@ import React, { Component } from 'react'
 import { Formik } from 'formik'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-import { Fields } from '../Fields'
+import { FieldComponent } from '../Fields'
 import schema from '../validate'
-
-// TODO: REMOVER
-const json = {
-  form: {
-    email: {
-      label: 'E-mail',
-      component: 'input',
-      type: 'email',
-      name: 'email',
-      value: 'teste@email.com',
-      validate: [
-        'string',
-        ['email', 'E-mail inválido'],
-        'required'
-      ],
-    },
-    phone: {
-      label: 'Telefone',
-      component: 'input',
-      type: 'text',
-      name: 'phone',
-      value: '',
-      format: 'phone',
-      validate: [
-        'string',
-        ['max', 15],
-        ['min', 3],
-        'required'
-      ],
-    },
-    subject: {
-      label: 'Assunto',
-      component: 'select',
-      name: 'subject',
-      value: 'Elegios',
-      options: ['', 'Elegios', 'Dúvidas'],
-      validate: [
-        'string',
-        'required'
-      ],
-    },
-  },
-  recaptcha: {
-    size: 'invisible',
-    sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
-  },
-}
 
 // TODO: REMOVER
 const DisplayFormikState = props =>
@@ -113,7 +66,7 @@ class InnerForm extends Component {
       <form>
         {
           formatData(data.form).map((item, key) =>
-            <Fields
+            <FieldComponent
               key={key}
               item={item}
               value={values[item.field]}
@@ -146,26 +99,16 @@ class InnerForm extends Component {
   }
 }
 
-const MyForm = ({ data, handleSubmit }) => (
-  <Formik
-    initialValues={{ ...formInitialValues(data.form) }}
-    validationSchema={schema(data.form)}
-    onSubmit={values => handleSubmit(values)}
-    render={props => <InnerForm data={data} {...props} />}
-  />
+const GsdForm = ({ data, handleSubmit, handleChanges }) => (
+  data && data.form ?
+    <Formik
+      initialValues={{ ...formInitialValues(data.form) }}
+      validationSchema={schema(data.form)}
+      onSubmit={values => handleSubmit(values)}
+      render={props =>
+        <InnerForm handleChanges={handleChanges} data={data} {...props} />
+      }
+    /> : <div/>
 )
-
-class GsdForm extends Component {
-
-  handleSubmit (value) {
-    console.log('onSubmit', value)
-  }
-
-  render() {
-    return (
-      <MyForm data={json} handleSubmit={this.handleSubmit} />
-    )
-  }
-}
 
 export default GsdForm

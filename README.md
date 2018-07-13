@@ -10,16 +10,8 @@ yarn add gsd-form
 import GsdForm from 'gsd-form'
 
 class App extends Component {
-
-  handleSubmit (value) {
-    // Recebe os valores do formulário para o envio
-    console.log('onSubmit', value)
-  }
-
   render() {
-    return (
-      <GsdForm data={data} handleSubmit={this.handleSubmit} />
-    )
+    return <GsdForm data={data} />
   }
 }
 ```
@@ -46,14 +38,46 @@ data = {
 | name | `String` | Nome do campo |
 | component | `String` | Opções - `input`, `textarea`, `select` |
 | value | `String` | *Adicionar caso tenha valor inicial* |
-| options | `Array` | Opções do componente `select` |
 | format | `String` | Opções - `numeric`, `phone`, `date` |
-| validate | `Array` | `[Tipo de validador do Yup, Mensagem de erro]`<br>ex.: `validate: [ 'string', ['email', 'E-mail inválido'], 'required', ]`<br>[Saiba mais](https://github.com/jquense/yup) |
+| validate | `Array<String>` | `[Tipo de validador do Yup, Mensagem de erro]`<br>ex.: `validate: [ 'string', ['email', 'E-mail inválido'], 'required', ]`<br>[Saiba mais](https://github.com/jquense/yup) |
+| __Field Select__ | - | - |
+| options | `Array<Object>` | Opções do componente `select` - `[{ value: 'One', label: 'One' }]` |
+| placeholder | `String` | Texto para o placeholder do `select` |
+| noOptionsMessage | `String` | Texto para quando não houver resultados no `select` |
+
+## Metodos
+```jsx
+class App extends Component {
+
+  handleSubmit (value) {
+    // Recebe os valores do formulário para o envio
+    console.log('onSubmit', value)
+  }
+
+  handleChanges (name, value) {
+    // Recebe os valores dos campos quando há mudanças
+    console.log('handleChanges', name, value)
+  }
+
+  render() {
+    return (
+      <GsdForm
+        data={data}
+        handleSubmit={this.handleSubmit}
+        handleChanges={(name, value) => this.handleChanges(name, value)}
+      />
+    )
+  }
+}
+
+export default App
+```
 
 ## Libs que usamos
 
 - [Formik](https://github.com/jaredpalmer/formik)
 - [Yup](https://github.com/jquense/yup)
+- [React select 2](https://github.com/JedWatson/react-select)
 - [React Google Recaptcha](https://github.com/dozoisch/react-google-recaptcha)
 
 ## Usando no desenvolvimento
