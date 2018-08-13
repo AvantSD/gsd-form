@@ -5,20 +5,6 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldComponent } from '../Fields'
 import schema from '../validate'
 
-// TODO: REMOVER
-const DisplayFormikState = props =>
-  <div style={{ margin: '1rem 0' }}>
-    <pre
-      style={{
-        background: '#f6f8fa',
-        fontSize: '.8rem',
-        padding: '1rem',
-      }}
-    >
-      <strong>props</strong> = {JSON.stringify(props, null, 2)}
-    </pre>
-  </div>
-
 const formatData = data =>
   Object.entries(data).reduce((res, fieldData) =>
     res.concat({
@@ -53,7 +39,7 @@ class InnerForm extends Component {
     this.refs.recaptcha.reset()
   }
 
-  render() {
+  render () {
     const {
       values,
       errors,
@@ -65,7 +51,7 @@ class InnerForm extends Component {
     return (
       <form className="gsd-form">
         {
-          formatData(data.form).map((item, key) =>
+          formatData(data.form.fields).map((item, key) =>
             <FieldComponent
               key={key}
               item={item}
@@ -81,7 +67,7 @@ class InnerForm extends Component {
           disabled={isSubmitting}
           onClick={e => this.onSubmit(e)}
         >
-          Submit
+          { data.form.submitButtonText || 'Submit' }
         </button>
         {
           data.recaptcha && data.recaptcha.sitekey &&
@@ -92,9 +78,6 @@ class InnerForm extends Component {
             onChange={captcha => this.formatValuesSubmit(captcha)}
           />
         }
-
-        {/* // TODO: REMOVER */}
-        <DisplayFormikState {...this.props} />
       </form>
     )
   }
@@ -103,13 +86,13 @@ class InnerForm extends Component {
 const GsdForm = ({ data, handleSubmit, handleChanges }) => (
   data && data.form ?
     <Formik
-      initialValues={{ ...formInitialValues(data.form) }}
-      validationSchema={schema(data.form)}
+      initialValues={{ ...formInitialValues(data.form.fields) }}
+      validationSchema={schema(data.form.fields)}
       onSubmit={values => handleSubmit(values)}
       render={props =>
         <InnerForm handleChanges={handleChanges} data={data} {...props} />
       }
-    /> : <div/>
+    /> : <div />
 )
 
 export default GsdForm

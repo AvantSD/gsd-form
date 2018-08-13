@@ -6,68 +6,71 @@ import './lib/css/style.css'
 
 const json = {
   form: {
-    email: {
-      label: 'E-mail',
-      component: 'input',
-      type: 'email',
-      name: 'email',
-      value: 'teste@email.com',
-      validate: [
-        'string',
-        ['email', 'E-mail inválido'],
-        'required'
-      ],
-    },
-    phone: {
-      label: 'Telefone',
-      component: 'input',
-      type: 'text',
-      name: 'phone',
-      value: '',
-      format: 'phone',
-      validate: [
-        'string',
-        ['max', 15],
-        ['min', 3],
-        'required'
-      ],
-    },
-    country: {
-      label: 'País',
-      component: 'select',
-      name: 'country',
-      value: [],
-      options: [],
-      placeholder: 'Selecione um país',
-      noOptionsMessage: 'Nenhum país encontrado',
-      validate: [
-        'string',
-        'required'
-      ],
-    },
-    state: {
-      label: 'Estado',
-      component: 'select',
-      name: 'state',
-      value: [],
-      options: [],
-      placeholder: 'Selecione um estado',
-      noOptionsMessage: 'Nenhum estado encontrado',
-      validate: [
-        'string',
-        'required'
-      ],
-    },
-    message: {
-      label: 'Mensagem',
-      component: 'textarea',
-      name: 'message',
-      value: 'Lorem ipsum',
-      validate: [
-        'string',
-        'required'
-      ],
-    },
+    submitButtonText: 'Send',
+    fields: {
+      email: {
+        label: 'E-mail',
+        component: 'input',
+        type: 'email',
+        name: 'email',
+        value: 'teste@email.com',
+        validate: [
+          'string',
+          ['email', 'E-mail inválido'],
+          'required'
+        ],
+      },
+      phone: {
+        label: 'Telefone',
+        component: 'input',
+        type: 'text',
+        name: 'phone',
+        value: '',
+        format: 'phone',
+        validate: [
+          'string',
+          ['max', 15],
+          ['min', 3],
+          'required'
+        ],
+      },
+      country: {
+        label: 'País',
+        component: 'select',
+        name: 'country',
+        value: [],
+        options: [],
+        placeholder: 'Selecione um país',
+        noOptionsMessage: 'Nenhum país encontrado',
+        validate: [
+          'string',
+          'required'
+        ],
+      },
+      state: {
+        label: 'Estado',
+        component: 'select',
+        name: 'state',
+        value: [],
+        options: [],
+        placeholder: 'Selecione um estado',
+        noOptionsMessage: 'Nenhum estado encontrado',
+        validate: [
+          'string',
+          'required'
+        ],
+      },
+      message: {
+        label: 'Mensagem',
+        component: 'textarea',
+        name: 'message',
+        value: 'Lorem ipsum',
+        validate: [
+          'string',
+          'required'
+        ],
+      },
+    }
   },
   recaptcha: {
     size: 'invisible',
@@ -77,14 +80,14 @@ const json = {
 
 class App extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       data: {},
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const country = locale.map(item => ({
       value: item.countryShortCode,
       label: item.countryName,
@@ -136,7 +139,7 @@ class App extends Component {
     this.setStatesByCountry(value)
   }
 
-  render() {
+  render () {
     return (
       <GsdForm
         data={this.state.data}
