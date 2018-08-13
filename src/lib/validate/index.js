@@ -9,7 +9,7 @@ const getValidators = data => {
   let validate = {}
   return yup.object().shape(
     Object.entries(data).reduce((acc, obj) => {
-      const [ key, field ] = obj
+      const [key, field] = obj
       if (key === field.name && field.validate) {
         validate = {
           ...acc,
@@ -23,9 +23,9 @@ const getValidators = data => {
 
 const formatValidate = data =>
   data && data.reduce((acc, validate) => {
-    const [ type, ...params ] = Array.isArray(validate)
+    const [type, ...params] = Array.isArray(validate)
       ? validate
-      : [validate]
+      : [ validate ]
 
     return acc[type](...params)
   }, yup)

@@ -17,7 +17,7 @@ class Fields extends Component {
     }
   }
 
-  render() {
+  render () {
     const Component = this.component
     return <Component {...this.props} />
   }

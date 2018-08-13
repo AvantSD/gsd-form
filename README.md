@@ -21,6 +21,7 @@ class App extends Component {
 ```js
 data = {
   form: {
+    submitButtonText: 'Send' //Opcional. Default : Submit
     field1: { ... },
     field2: { ... },
   },

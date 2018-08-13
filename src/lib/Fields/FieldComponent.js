@@ -13,7 +13,7 @@ class FieldComponent extends Component {
     handleChanges(name, values)
   }
 
-  render() {
+  render () {
     const { error, item: { label } } = this.props
     return (
       <div className="gsd-form-field">

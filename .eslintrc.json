@@ -2,11 +2,13 @@
   "env": {
     "browser": true,
     "commonjs": true,
-    "es6": true
+    "es6": true,
+    "jasmine": true,
+    "node": true
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
       "jsx": true
     },
     "sourceType": "module"
@@ -18,7 +20,9 @@
     "indent": [
       "error",
       2,
-      { "SwitchCase": 1 }
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
@@ -44,10 +48,6 @@
       "error",
       "only-multiline"
     ],
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
     "generator-star-spacing": [
       "error",
       "after"
@@ -56,6 +56,41 @@
       "error",
       "always"
     ],
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": "error",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "always",
+        "asyncArrow": "always"
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never",
+      {
+        "singleValue": true,
+        "objectsInArrays": true,
+        "arraysInArrays": true
+      }
+    ],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
+    "react/jsx-curly-spacing": [
+      "error",
+      {
+        "when": "always",
+        "attributes": {
+          "when": "never"
+        },
+        "children": true
+      }
+    ]
   }
 }
