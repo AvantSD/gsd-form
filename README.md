@@ -1,5 +1,7 @@
 # GsdForm
 
+Biblioteca para rápida geração de formulários em React
+
 ## Instalação
 ```
 yarn add gsd-form
@@ -47,7 +49,7 @@ data = {
 | placeholder | `String` | Texto para o placeholder do `select` |
 | noOptionsMessage | `String` | Texto para quando não houver resultados no `select` |
 
-## Metodos
+## Métodos
 ```jsx
 class App extends Component {
 
