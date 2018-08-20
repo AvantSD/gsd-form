@@ -1,6 +1,7 @@
 {
   "name": "gsd-form",
   "version": "0.1.0",
+  "homepage": "https://github.com/AvantSD/gsd-form",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -29,5 +30,9 @@
     "react-select": "next",
     "vanilla-masker": "^1.2.0",
     "yup": "^0.25.1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "git+https://github.com/AvantSD/gsd-form"
   }
 }
