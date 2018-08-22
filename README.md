@@ -1,16 +1,18 @@
 # GsdForm
 
-Biblioteca para rápida geração de formulários em React
+Formik-based React library to create forms from plain JS objects (or JSON!)
 
-## Instalação
+## Installing
+
 ```
 yarn add gsd-form
 ```
 
-## Usando no projeto
+## Usage
+
 ```jsx
 import GsdForm from 'gsd-form'
-import 'gsd-form/style.css' // Opcional
+import 'gsd-form/style.css' // Optional
 
 class App extends Component {
   render() {
@@ -19,47 +21,48 @@ class App extends Component {
 }
 ```
 
-## Exemplo de data
+### Form data example
+
 ```js
 data = {
   form: {
-    submitButtonText: 'Send' //Opcional. Default : Submit
+    submitButtonText: 'Send' // Optional. Default : Submit
     field1: { ... },
     field2: { ... },
   },
   recaptcha: {
-    size: 'invisible', // compact, normal, invisible
+    size: 'invisible', // one of compact, normal, invisible
     sitekey: 'SITEKEY_CODE',
   }
 }
 
 ```
 
-## Propriedades dos Fields
-| Propriedades | Tipo | Descrição |
+## Field props
+| Property | Type | Description |
 |:---- | ---- | ------ |
-| label | `String` | Valor da label |
-| name | `String` | Nome do campo |
-| component | `String` | Opções - `input`, `textarea`, `select` |
-| value | `String` | *Adicionar caso tenha valor inicial* |
-| format | `String` | Opções - `numeric`, `phone`, `date` |
-| validate | `Array<String>` | `[Tipo de validador do Yup, Mensagem de erro]`<br>ex.: `validate: [ 'string', ['email', 'E-mail inválido'], 'required', ]`<br>[Saiba mais](https://github.com/jquense/yup) |
+| label | `String` | Label text |
+| name | `String` | Field (HTML input) name |
+| component | `String` | Options - `input`, `textarea`, `select` |
+| value | `String` | *Initial (default) value* |
+| format | `String` | Options - `numeric`, `phone`, `date` |
+| validate | `Array<String>` | `[Yup validator, Optional custom error message]`<br>ex.: `validate: [ 'string', ['email', 'Invalid email format'], 'required', ]`<br>[More](https://github.com/jquense/yup) |
 | __Field Select__ | - | - |
-| options | `Array<Object>` | Opções do componente `select` - `[{ value: 'One', label: 'One' }]` |
-| placeholder | `String` | Texto para o placeholder do `select` |
-| noOptionsMessage | `String` | Texto para quando não houver resultados no `select` |
+| options | `Array<Object>` | Options for `select` inputs - `[{ value: 'One', label: 'One' }]` |
+| placeholder | `String` | `select` placeholder text' |
+| noOptionsMessage | `String` | Fallback text for empty `select` options |
 
-## Métodos
+## Method props
+
 ```jsx
 class App extends Component {
-
   handleSubmit (value) {
-    // Recebe os valores do formulário para o envio
+    // send to a REST API ...
     console.log('onSubmit', value)
   }
 
   handleChanges (name, value) {
-    // Recebe os valores dos campos quando há mudanças
+    // Called when each field changes
     console.log('handleChanges', name, value)
   }
 
@@ -77,33 +80,30 @@ class App extends Component {
 export default App
 ```
 
-## Libs que usamos
+You can use the `handleChanges` prop to, for example, change the available
+options for interdependent `select` inputs, such as country/state/city.
+
+## Dependencies
 
 - [Formik](https://github.com/jaredpalmer/formik)
 - [Yup](https://github.com/jquense/yup)
 - [React select 2](https://github.com/JedWatson/react-select)
 - [React Google Recaptcha](https://github.com/dozoisch/react-google-recaptcha)
 
-## Usando no desenvolvimento
+## Contributing and developing
 
-Todo o conteúdo que deve ser publicado no registro (NPM ou privado) deve estar em `src/lib`. Fora dessa pasta (mas ainda dentro de `src/`), podem ficar scripts e páginas para desenvolvimento, testes e exemplos.
+The projectwas created using `create-react-library`, so it should have its]
+basic structure updated soon. Right now, all the lib content should reside
+inside `src/lib`, everything else can be used when developing or as examples.
 
-Para iniciar o servidor de desenvolvimento (iniciado em `src/index.js`):
+You can start the dev server running:
 
 ```
 yarn start
 ```
 
-Para transpilar `src/lib` e criar uma build em `dist`:
+A production version can be generated using:
 
 ```
 yarn build
 ```
-
-Para publicar no registro privado:
-
-```
-yarn publish
-```
-
-OBS: Apenas o `README.md` e a pasta `dist` são publicadas.
