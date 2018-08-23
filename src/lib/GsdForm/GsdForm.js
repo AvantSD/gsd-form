@@ -90,11 +90,7 @@ const GsdForm = ({ data, handleSubmit, handleChanges }) => (
       validationSchema={schema(data.form.fields)}
       onSubmit={values => handleSubmit(values)}
       render={props =>
-        <InnerForm
-          data={data}
-          handleChanges={handleChanges || () => {}}
-          {...props}
-        />
+        <InnerForm handleChanges={handleChanges} data={data} {...props} />
       }
     /> : <div />
 )
