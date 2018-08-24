@@ -26,7 +26,10 @@ class App extends Component {
 ```js
 data = {
   form: {
-    submitButtonText: 'Send' // Optional. Default : Submit
+    submitButton: {
+      text: 'Send', // Optional. Default : Submit
+      component: CustomComponent,
+    },
     field1: { ... },
     field2: { ... },
   },
@@ -82,6 +85,9 @@ export default App
 
 You can use the `handleChanges` prop to, for example, change the available
 options for interdependent `select` inputs, such as country/state/city.
+
+If you use a custom component for the submit button, you can pass a props
+`buttonProps={Object}`.
 
 ## Dependencies
 

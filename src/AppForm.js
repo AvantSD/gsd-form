@@ -6,7 +6,9 @@ import './lib/css/style.css'
 
 const json = {
   form: {
-    submitButtonText: 'Send',
+    submitButton: {
+      text: 'Send',
+    },
     fields: {
       email: {
         label: 'E-mail',

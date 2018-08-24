@@ -45,8 +45,16 @@ class InnerForm extends Component {
       errors,
       touched,
       isSubmitting,
-      data
+      data,
+      buttonProps,
     } = this.props
+
+    const { form: { submitButton }, recaptcha } = data
+
+    let ButtonComponent
+    if (submitButton.component) {
+      ButtonComponent = submitButton.component
+    }
 
     return (
       <form className="gsd-form">
@@ -61,20 +69,29 @@ class InnerForm extends Component {
             />
           )
         }
-        <button
-          className="gsd-form-button"
-          type="submit"
-          disabled={isSubmitting}
-          onClick={e => this.onSubmit(e)}
-        >
-          { data.form.submitButtonText || 'Submit' }
-        </button>
         {
-          data.recaptcha && data.recaptcha.sitekey &&
+          (submitButton && submitButton.component) ?
+          <ButtonComponent
+            type="submit"
+            disabled={isSubmitting}
+            onClick={e => this.onSubmit(e)}
+            {...buttonProps}
+          /> :
+          <button
+            className="gsd-form-button"
+            type="submit"
+            disabled={isSubmitting}
+            onClick={e => this.onSubmit(e)}
+          >
+            { submitButton.text || 'Submit' }
+          </button>
+        }
+        {
+          recaptcha && recaptcha.sitekey &&
           <ReCAPTCHA
             ref="recaptcha"
-            size={data.recaptcha.size || 'invisible'}
-            sitekey={data.recaptcha.sitekey}
+            size={recaptcha.size || 'invisible'}
+            sitekey={recaptcha.sitekey}
             onChange={captcha => this.formatValuesSubmit(captcha)}
           />
         }
@@ -83,7 +100,7 @@ class InnerForm extends Component {
   }
 }
 
-const GsdForm = ({ data, handleSubmit, handleChanges }) => (
+const GsdForm = ({ data, handleSubmit, handleChanges, buttonProps }) => (
   data && data.form ?
     <Formik
       initialValues={{ ...formInitialValues(data.form.fields) }}
@@ -93,6 +110,7 @@ const GsdForm = ({ data, handleSubmit, handleChanges }) => (
         <InnerForm
           data={data}
           handleChanges={handleChanges || (() => {})}
+          buttonProps={buttonProps || {}}
           {...props}
         />
       }
