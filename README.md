@@ -71,12 +71,18 @@ class App extends Component {
     console.log('handleChanges', name, value)
   }
 
+  afterValidation (form) {
+    // Called when each field changes
+    console.log('afterValidation', form)
+  }
+
   render() {
     return (
       <GsdForm
         data={data}
         handleSubmit={this.handleSubmit}
         handleChanges={(name, value) => this.handleChanges(name, value)}
+        afterValidation={form => this.afterValidation(form)}
       />
     )
   }

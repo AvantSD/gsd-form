@@ -118,19 +118,32 @@ class InnerForm extends Component {
   }
 }
 
-const GsdForm = ({ data, handleSubmit, handleChanges, buttonProps }) => (
+const GsdForm = ({
+  data,
+  handleSubmit,
+  handleChanges,
+  buttonProps,
+  afterValidation
+}) => (
   data && data.form ?
     <Formik
       initialValues={{ ...formInitialValues(data.form.fields) }}
       validationSchema={schema(data.form.fields)}
       onSubmit={values => handleSubmit(values)}
-      render={props =>
-        <InnerForm
-          data={data}
-          handleChanges={handleChanges || (() => {})}
-          buttonProps={buttonProps || {}}
-          {...props}
-        />
+      render={props => {
+        const { values, errors, touched, isValid } = props
+        return (
+          <InnerForm
+            data={data}
+            handleChanges={handleChanges || (() => {})}
+            buttonProps={buttonProps || {}}
+            afterValidation={
+              afterValidation({ values, errors, touched, isValid }) || (() => {})
+            }
+            {...props}
+          />
+        )
+      }
       }
     /> : <div />
 )
