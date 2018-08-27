@@ -30,8 +30,7 @@ data = {
       text: 'Send', // Optional. Default : Submit
       component: CustomComponent,
     },
-    field1: { ... },
-    field2: { ... },
+    fields: { ... },
   },
   recaptcha: {
     size: 'invisible', // one of compact, normal, invisible
