@@ -5,6 +5,20 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldComponent } from '../Fields'
 import schema from '../validate'
 
+const ShowFormState = props =>
+  <div style={{ margin: '1rem 0' }}>
+    <pre
+      style={{
+        background: '#f6f8fa',
+        fontSize: '.8rem',
+        padding: '1rem',
+      }}
+    >
+      <strong>props</strong> = { JSON.stringify(props, null, 2) }
+    </pre>
+  </div>
+
+
 const formatData = data =>
   Object.entries(data).reduce((res, fieldData) =>
     res.concat({
@@ -94,6 +108,10 @@ class InnerForm extends Component {
             sitekey={recaptcha.sitekey}
             onChange={captcha => this.formatValuesSubmit(captcha)}
           />
+        }
+        {
+          data.showFormState &&
+          <ShowFormState {...this.props} />
         }
       </form>
     )

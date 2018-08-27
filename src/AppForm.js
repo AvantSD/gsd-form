@@ -78,6 +78,7 @@ const json = {
     size: 'invisible',
     sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
   },
+  showFormState: true,
 }
 
 class App extends Component {
