@@ -2,6 +2,8 @@
 
 Formik-based React library to create forms from plain JS objects (or JSON!)
 
+[Demo](https://codesandbox.io/s/zlrmp3o77l)
+
 ## Installing
 
 ```
