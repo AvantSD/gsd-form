@@ -35,7 +35,8 @@ data = {
   recaptcha: {
     size: 'invisible', // one of compact, normal, invisible
     sitekey: 'SITEKEY_CODE',
-  }
+  },
+  showFormState: Boolean // Optional
 }
 
 ```
