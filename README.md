@@ -63,9 +63,10 @@ You can also pass any other [`ReactSelect`](https://github.com/JedWatson/react-s
 
 ```jsx
 class App extends Component {
-  handleSubmit (value) {
+  handleSubmit (value, setters) {
     // send to a REST API ...
     console.log('onSubmit', value)
+    setters.setSubmitting(false)
   }
 
   handleChanges (name, value) {
@@ -92,6 +93,11 @@ class App extends Component {
 
 export default App
 ```
+
+See that the `handleSubmit` function has both parameters passed by Formik:
+values and a series of setters (errors, values, submitting, ...). You could
+use those to use backend validation or manage the loading/submitting state,
+for example.
 
 You can use the `handleChanges` prop to, for example, change the available
 options for interdependent `select` inputs, such as country/state/city.

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import locale from './locale'
 
-import { GsdForm } from './lib'
+import GsdForm from './lib'
 import './lib/css/style.css'
 
 const json = {
@@ -133,8 +133,16 @@ class App extends Component {
     }))
   }
 
-  handleSubmit (value) {
+  handleSubmit (value, { setSubmitting, setErrors, setValues }) {
     console.log('onSubmit', value)
+
+    // Simulating a delayed return from an API
+    setTimeout(() => {
+      setSubmitting(false)
+      setErrors({
+        email: 'Email já utilizado'
+      })
+    }, 1000)
   }
 
   handleChanges (name, value) {
