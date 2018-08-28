@@ -71,9 +71,9 @@ class App extends Component {
     console.log('handleChanges', name, value)
   }
 
-  afterValidation (form) {
+  buttonProps (form) {
     // Called when each field changes
-    console.log('afterValidation', form)
+    console.log('buttonProps', form)
   }
 
   render() {
@@ -82,7 +82,7 @@ class App extends Component {
         data={data}
         handleSubmit={this.handleSubmit}
         handleChanges={(name, value) => this.handleChanges(name, value)}
-        afterValidation={form => this.afterValidation(form)}
+        buttonProps={form => this.buttonProps(form)}
       />
     )
   }
@@ -93,9 +93,6 @@ export default App
 
 You can use the `handleChanges` prop to, for example, change the available
 options for interdependent `select` inputs, such as country/state/city.
-
-If you use a custom component for the submit button, you can pass a props
-`buttonProps={Object}`.
 
 ## Dependencies
 

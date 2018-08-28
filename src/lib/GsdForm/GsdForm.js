@@ -70,6 +70,13 @@ class InnerForm extends Component {
       ButtonComponent = submitButton.component
     }
 
+    const btnProps = {
+      type: 'submit',
+      disabled: isSubmitting,
+      onClick: e => this.onSubmit(e),
+      ...buttonProps(this.props),
+    }
+
     return (
       <form className="gsd-form">
         {
@@ -85,18 +92,8 @@ class InnerForm extends Component {
         }
         {
           (submitButton && submitButton.component) ?
-          <ButtonComponent
-            type="submit"
-            disabled={isSubmitting}
-            onClick={e => this.onSubmit(e)}
-            {...buttonProps}
-          /> :
-          <button
-            className="gsd-form-button"
-            type="submit"
-            disabled={isSubmitting}
-            onClick={e => this.onSubmit(e)}
-          >
+          <ButtonComponent {...btnProps} /> :
+          <button className="gsd-form-button" {...btnProps}>
             { submitButton.text || 'Submit' }
           </button>
         }
@@ -123,27 +120,19 @@ const GsdForm = ({
   handleSubmit,
   handleChanges,
   buttonProps,
-  afterValidation
 }) => (
   data && data.form ?
     <Formik
       initialValues={{ ...formInitialValues(data.form.fields) }}
       validationSchema={schema(data.form.fields)}
       onSubmit={values => handleSubmit(values)}
-      render={props => {
-        const { values, errors, touched, isValid } = props
-        return (
-          <InnerForm
-            data={data}
-            handleChanges={handleChanges || (() => {})}
-            buttonProps={buttonProps || {}}
-            afterValidation={
-              afterValidation({ values, errors, touched, isValid }) || (() => {})
-            }
-            {...props}
-          />
-        )
-      }
+      render={props =>
+        <InnerForm
+          data={data}
+          handleChanges={handleChanges || (() => {})}
+          buttonProps={buttonProps || (() => {})}
+          {...props}
+        />
       }
     /> : <div />
 )
