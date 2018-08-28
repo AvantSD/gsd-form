@@ -1,3 +1,3 @@
 import GsdForm from './GsdForm/GsdForm'
 
-export { GsdForm }
+export default GsdForm

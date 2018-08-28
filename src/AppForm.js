@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import locale from './locale'
 
-import { GsdForm } from './lib'
+import GsdForm from './lib'
 import './lib/css/style.css'
 
 const json = {
