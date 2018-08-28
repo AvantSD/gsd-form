@@ -1,6 +1,6 @@
 {
   "name": "gsd-form",
-  "version": "0.1.10-alpha",
+  "version": "0.1.11-alpha",
   "description": "Biblioteca para rápida geração de formulários em React",
   "homepage": "https://github.com/AvantSD/gsd-form",
   "main": "dist/index.js",
