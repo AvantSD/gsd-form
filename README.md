@@ -57,6 +57,8 @@ data = {
 | placeholder | `String` | `select` placeholder text' |
 | noOptionsMessage | `String` | Fallback text for empty `select` options |
 
+You can also pass any other [`ReactSelect`](https://github.com/JedWatson/react-select) prop to `select` fields, such as `menuIsOpen`.
+
 ## Method props
 
 ```jsx
