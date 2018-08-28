@@ -92,10 +92,10 @@ class InnerForm extends Component {
         }
         {
           (submitButton && submitButton.component) ?
-          <ButtonComponent {...btnProps} /> :
-          <button className="gsd-form-button" {...btnProps}>
-            { submitButton.text || 'Submit' }
-          </button>
+            <ButtonComponent {...btnProps} /> :
+            <button className="gsd-form-button" {...btnProps}>
+              { submitButton.text || 'Submit' }
+            </button>
         }
         {
           recaptcha && recaptcha.sitekey &&
@@ -125,7 +125,7 @@ const GsdForm = ({
     <Formik
       initialValues={{ ...formInitialValues(data.form.fields) }}
       validationSchema={schema(data.form.fields)}
-      onSubmit={values => handleSubmit(values)}
+      onSubmit={(values, setters) => handleSubmit(values, setters)}
       render={props =>
         <InnerForm
           data={data}

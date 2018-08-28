@@ -133,8 +133,16 @@ class App extends Component {
     }))
   }
 
-  handleSubmit (value) {
+  handleSubmit (value, { setSubmitting, setErrors, setValues }) {
     console.log('onSubmit', value)
+
+    // Simulating a delayed return from an API
+    setTimeout(() => {
+      setSubmitting(false)
+      setErrors({
+        email: 'Email já utilizado'
+      })
+    }, 1000)
   }
 
   handleChanges (name, value) {
