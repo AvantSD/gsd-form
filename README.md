@@ -39,6 +39,7 @@ data = {
     sitekey: 'SITEKEY_CODE',
   },
   showFormState: Boolean // Optional
+  honeypot: Boolean // Optional
 }
 
 ```
