@@ -143,12 +143,14 @@ const GsdForm = ({
   handleSubmit,
   handleChanges,
   buttonProps,
+  ...otherProps,
 }) => (
   data && data.form ?
     <Formik
       initialValues={{ ...formInitialValues(data.form.fields) }}
       validationSchema={schema(data.form.fields)}
       onSubmit={(values, setters) => handleSubmit(values, setters)}
+      {...otherProps}
       render={props =>
         <InnerForm
           data={data}
