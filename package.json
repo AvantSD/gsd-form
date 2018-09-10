@@ -1,7 +1,7 @@
 {
   "name": "gsd-form",
-  "version": "0.1.12-alpha",
-  "description": "Biblioteca para rápida geração de formulários em React",
+  "version": "0.1.13",
+  "description": "Formik-based React library to create forms from plain JS objects",
   "homepage": "https://github.com/AvantSD/gsd-form",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -16,12 +16,14 @@
     "lint": "eslint src",
     "build": "rimraf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__"
   },
+  "peerDependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.9.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
     "rimraf": "^2.6.2"
   },
