@@ -79,6 +79,7 @@ const json = {
     sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
   },
   showFormState: true,
+  honeypot: true,
 }
 
 class App extends Component {

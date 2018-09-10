@@ -33,17 +33,24 @@ const formInitialValues = data =>
   }), {})
 
 class InnerForm extends Component {
+  state = {
+    isSpam: false
+  }
 
   onSubmit (e) {
     e.preventDefault()
     if (this.refs.recaptcha) {
       this.refs.recaptcha.execute()
-    } else if (!this.props.data.recaptcha) {
+    } else if (!this.props.data.recaptcha && !this.state.isSpam) {
       this.props.submitForm()
     }
   }
 
   formatValuesSubmit (recaptcha) {
+    if (this.state.isSpam) {
+      return
+    }
+    
     const params = {
       ...this.props.values,
       recaptcha,
@@ -51,6 +58,10 @@ class InnerForm extends Component {
     this.props.setValues(params)
     this.props.submitForm()
     this.refs.recaptcha.reset()
+  }
+
+  handleHoneypot () {
+    this.setState({ isSpam: true })
   }
 
   render () {
@@ -89,6 +100,18 @@ class InnerForm extends Component {
               {...this.props}
             />
           )
+        }
+        {
+          data.honeypot &&
+            <input
+              onChange={() => this.handleHoneypot()}
+              type="checkbox"
+              name="user-terms"
+              value="true"
+              tabIndex="-1"
+              style={{ display: 'none' }}
+              autoComplete="nope">
+            </input>
         }
         {
           (submitButton && submitButton.component) ?
