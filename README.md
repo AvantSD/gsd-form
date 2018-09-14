@@ -50,6 +50,7 @@ data = {
 | label | `String` | Label text |
 | name | `String` | Field (HTML input) name |
 | component | `String` | Options - `input`, `textarea`, `select` |
+| fieldClass | `String` | - |
 | value | `String` | *Initial (default) value* |
 | format | `String` | Options - `numeric`, `phone`, `date` |
 | validate | `Array<String>` | `[Yup validator, Optional custom error message]`<br>ex.: `validate: [ 'string', ['email', 'Invalid email format'], 'required', ]`<br>[More](https://github.com/jquense/yup) |

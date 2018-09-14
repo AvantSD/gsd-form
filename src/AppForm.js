@@ -25,6 +25,7 @@ const json = {
       phone: {
         label: 'Telefone',
         component: 'input',
+        fieldClass: 'custom-class',
         type: 'text',
         name: 'phone',
         value: '',
