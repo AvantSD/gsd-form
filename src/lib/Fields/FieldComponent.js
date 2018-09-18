@@ -15,10 +15,14 @@ class FieldComponent extends Component {
 
   render () {
     const { error, item: { label, fieldClass } } = this.props
-    const className = fieldClass ? fieldClass : ''
+    const classes = [
+      'gsd-form-field',
+      fieldClass ? fieldClass : '',
+      error ? 'gsd-form-error' : '',
+    ].join(' ').trim()
     return (
-      <div className={`gsd-form-field ${className}`}>
-        <label className={error ? 'gsd-form-error' : ''}>{ label }</label>
+      <div className={classes}>
+        <label>{ label }</label>
         <Fields onChanges={e => this.onChanges(e)} {...this.props} />
         <Feedback errors={error} />
       </div>

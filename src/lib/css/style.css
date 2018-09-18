@@ -60,14 +60,14 @@
   color: #f44336;
 }
 
-.gsd-form-field label.gsd-form-error {
+.gsd-form-error label {
   color: #f44336;
 }
-.gsd-form-field input.gsd-form-error,
-.gsd-form-field textarea.gsd-form-error {
-  border: 1px solid #f44336;
-}
 
-.gsd-form-field .gsd-form-select-wrap.gsd-form-error .gsd-form-select__control {
+.gsd-form-error.gsd-form-field input[type="text"],
+.gsd-form-error.gsd-form-field input[type="number"],
+.gsd-form-error.gsd-form-field input[type="email"],
+.gsd-form-error.gsd-form-field textarea,
+.gsd-form-error.gsd-form-field .gsd-form-select-wrap .gsd-form-select__control {
   border: 1px solid #f44336;
 }
