@@ -19,7 +19,6 @@ class SelectField extends Component {
     const {
       value,
       onChanges,
-      error,
       item: {
         component,
         field,
@@ -36,7 +35,7 @@ class SelectField extends Component {
       <Select
         {...rest}
         options={options}
-        className={`gsd-form-select-wrap ${error ? 'gsd-form-error' : ''}`}
+        className="gsd-form-select-wrap"
         classNamePrefix="gsd-form-select"
         noOptionsMessage={() => noOptionsMessage}
         value={this.getValue(value, options)}
