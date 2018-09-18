@@ -35,6 +35,13 @@
   border: 1px solid hsl(0,0%,80%);
   box-shadow: none;
 }
+
+.gsd-form-field input:disabled,
+.gsd-form-field textarea:disabled,
+.gsd-form-select-wrap.gsd-form-select--is-disabled {
+  cursor: not-allowed;
+}
+
 .gsd-form-field textarea {
   height: 100px;
 }
