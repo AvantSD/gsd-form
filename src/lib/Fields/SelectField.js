@@ -27,6 +27,7 @@ class SelectField extends Component {
         noOptionsMessage,
         options,
         useObject,
+        disabled,
         ...rest,
       }
     } = this.props
@@ -34,6 +35,7 @@ class SelectField extends Component {
     return (
       <Select
         {...rest}
+        isDisabled={disabled}
         options={options}
         className="gsd-form-select-wrap"
         classNamePrefix="gsd-form-select"
