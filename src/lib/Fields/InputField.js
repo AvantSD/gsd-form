@@ -6,7 +6,6 @@ const InputField = props => {
   return (
     <Field
       disabled={disabled}
-      className={error ? 'gsd-form-error' : ''}
       component={component}
       type={type}
       name={name}
