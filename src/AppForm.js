@@ -103,9 +103,12 @@ class App extends Component {
         ...json,
         form: {
           ...json.form,
-          country: {
-            ...json.form.country,
-            options: country
+          fields: {
+            ...json.form.fields,
+            country: {
+              ...json.form.fields.country,
+              options: country
+            }
           }
         }
       }
@@ -114,7 +117,7 @@ class App extends Component {
 
   setStatesByCountry (value) {
     const states = locale
-      .filter(item => value.label ? item.countryName === value.label : true)
+      .filter(item => item.countryShortCode === value)
       .reduce((acc, item) => item.regions.map(item => ({
         value: item.shortCode,
         label: item.name,
@@ -126,9 +129,12 @@ class App extends Component {
         ...prevState.data,
         form: {
           ...prevState.data.form,
-          state: {
-            ...prevState.data.form.state,
-            options: states
+          fields: {
+            ...prevState.data.form.fields,
+            state: {
+              ...prevState.data.form.fields.state,
+              options: states
+            }
           }
         }
       }

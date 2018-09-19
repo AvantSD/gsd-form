@@ -2,7 +2,10 @@
 
 Formik-based React library to create forms from plain JS objects (or JSON!)
 
-[Demo](https://codesandbox.io/s/zlrmp3o77l)
+## Demo
+
+[Single fields object](https://codesandbox.io/s/zlrmp3o77l)
+[Multiple field sets](https://codesandbox.io/s/y3wxvk3lyv)
 
 ## Installing
 
@@ -112,6 +115,10 @@ for example.
 
 You can use the `handleChanges` prop to, for example, change the available
 options for interdependent `select` inputs, such as country/state/city.
+
+Another useful `GsdForm` prop is `values`, which can be used to pass dynamic
+values to Formik and make whatever desired inputs fully controlled by your
+parent component.
 
 ## Dependencies
 
