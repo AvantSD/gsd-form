@@ -5,6 +5,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldComponent } from '../Fields'
 import schema from '../validate'
 
+const deepCompare = (a, b) => JSON.stringify(a) === JSON.stringify(b)
+
 const ShowFormState = props =>
   <div style={{ margin: '1rem 0' }}>
     <pre
@@ -40,7 +42,26 @@ const formInitialValues = data => {
 
 class InnerForm extends Component {
   state = {
-    isSpam: false
+    isSpam: false,
+    values: {},
+  }
+
+  static getDerivedStateFromProps (props, state) {
+    return props.dynamicData
+      ? {
+        ...state,
+        values: {
+          ...props.values,
+          ...props.dynamicData,
+        }
+      }
+      : null
+  }
+
+  componentDidUpdate ({ dynamicData, values }) {
+    if (dynamicData && !deepCompare(values, this.state.values)) {
+      this.props.setValues({ ...this.state.values })
+    }
   }
 
   onSubmit (e) {
@@ -81,7 +102,7 @@ class InnerForm extends Component {
       buttonProps,
     } = this.props
 
-    const { form: { submitButton }, recaptcha } = data
+    const { form: { submitButton = {} }, recaptcha } = data
 
     let ButtonComponent
     if (submitButton.component) {
@@ -95,35 +116,29 @@ class InnerForm extends Component {
       ...buttonProps(this.props),
     }
 
+    const formattedFields = fields => (
+      formatData(fields).map((item, key) =>
+        <FieldComponent
+          key={key}
+          item={item}
+          value={values[item.field]}
+          error={touched[item.field] && errors[item.field]}
+          {...this.props}
+        />
+      )
+    )
+
     return (
       <form className="gsd-form">
         {
-          Array.isArray(data.form.fields) &&
+          (Array.isArray(data.form.fields) &&
           data.form.fields.map((field, i) =>
             <div className="gsd-form-fieldset" key={i}>
               <h5 className="gsd-form-fieldset-label">{ field.name }</h5>
-              {
-                formatData(field.fields).map((item, key) =>
-                  <FieldComponent
-                    key={key}
-                    item={item}
-                    value={values[item.field]}
-                    error={touched[item.field] && errors[item.field]}
-                    {...this.props}
-                  />
-                )
-              }
+              { formattedFields(field.fields) }
             </div>
-          ) ||
-          formatData(data.form.fields).map((item, key) =>
-            <FieldComponent
-              key={key}
-              item={item}
-              value={values[item.field]}
-              error={touched[item.field] && errors[item.field]}
-              {...this.props}
-            />
-          )
+          )) ||
+          formattedFields(data.form.fields)
         }
         {
           data.honeypot &&
@@ -167,6 +182,7 @@ const GsdForm = ({
   handleSubmit,
   handleChanges,
   buttonProps,
+  values,
   ...otherProps,
 }) => (
   data && data.form ?
@@ -180,6 +196,7 @@ const GsdForm = ({
           data={data}
           handleChanges={handleChanges || (() => {})}
           buttonProps={buttonProps || (() => {})}
+          dynamicData={values}
           {...props}
         />
       }
