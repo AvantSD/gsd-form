@@ -7,8 +7,13 @@ setLocale(ptBR)
 
 const getValidators = data => {
   let validate = {}
+  const dataArray = Array.isArray(data) ? data : [ data ]
+  const yupObject = dataArray
+    .map(item => item.fields ? item.fields : item)
+    .reduce((acc, item) => ({ ...acc, ...item }) , {})
+
   return yup.object().shape(
-    Object.entries(data).reduce((acc, obj) => {
+    Object.entries(yupObject).reduce((acc, obj) => {
       const [key, field] = obj
       if (key === field.name && field.validate) {
         validate = {
