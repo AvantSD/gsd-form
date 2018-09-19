@@ -32,7 +32,15 @@ data = {
       text: 'Send', // Optional. Default : Submit
       component: CustomComponent,
     },
-    fields: { ... },
+    fields: { ... }, // Inline form
+    // For forms sections you can use an array with nested fields
+    // P.S.: These fields will be flattened on submit
+    fields: [
+      {
+        name: 'String',
+        fields: { ... } // Equal inline form
+      }
+    ],
   },
   recaptcha: {
     size: 'invisible', // one of compact, normal, invisible

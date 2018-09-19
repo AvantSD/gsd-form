@@ -26,11 +26,17 @@ const formatData = data =>
       field: fieldData.shift()
     }), [])
 
-const formInitialValues = data =>
-  Object.keys(data).reduce((acc, item) => ({
+const formInitialValues = data => {
+  const dataArray = Array.isArray(data) ? data : [ data ]
+  const dataObj = dataArray
+    .map(item => item.fields ? item.fields : item)
+    .reduce((acc, item) => ({ ...acc, ...item }), {})
+
+  return Object.keys(dataObj).reduce((acc, item) => ({
     ...acc,
-    [item]: data[item].value
+    [item]: dataObj[item].value
   }), {})
+}
 
 class InnerForm extends Component {
   state = {
@@ -50,11 +56,12 @@ class InnerForm extends Component {
     if (this.state.isSpam) {
       return
     }
-    
+
     const params = {
       ...this.props.values,
       recaptcha,
     }
+
     this.props.setValues(params)
     this.props.submitForm()
     this.refs.recaptcha.reset()
@@ -91,6 +98,23 @@ class InnerForm extends Component {
     return (
       <form className="gsd-form">
         {
+          Array.isArray(data.form.fields) &&
+          data.form.fields.map((field, i) =>
+            <div className="gsd-form-fieldset" key={i}>
+              <h5 className="gsd-form-fieldset-label">{ field.name }</h5>
+              {
+                formatData(field.fields).map((item, key) =>
+                  <FieldComponent
+                    key={key}
+                    item={item}
+                    value={values[item.field]}
+                    error={touched[item.field] && errors[item.field]}
+                    {...this.props}
+                  />
+                )
+              }
+            </div>
+          ) ||
           formatData(data.form.fields).map((item, key) =>
             <FieldComponent
               key={key}
