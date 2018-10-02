@@ -5,7 +5,7 @@ import formats from '../format'
 import Feedback from '../Feedback/Feedback'
 import classSet from '../util/classSet'
 
-const isRequired = validate => {
+const isRequired = (validate = []) => {
   return !!validate.find(item => {
     if (Array.isArray(item)) {
       return item[0] === 'required'
