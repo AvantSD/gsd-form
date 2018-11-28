@@ -1,9 +1,3 @@
-import React from 'react'
-import { render } from 'react-dom'
-import AppForm from './AppForm'
+import GsdForm from './GsdForm/GsdForm'
 
-const App = () => (
-  <AppForm />
-)
-
-render(<App />, document.getElementById('root'))
+export default GsdForm
