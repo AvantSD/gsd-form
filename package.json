@@ -1,6 +1,6 @@
 {
   "name": "gsd-form",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Formik-based React library to create forms from plain JS objects",
   "homepage": "https://github.com/AvantSD/gsd-form",
   "main": "dist/index.js",
