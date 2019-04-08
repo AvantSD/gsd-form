@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import locale from './locale'
 
-import GsdForm from './lib'
-import './lib/css/style.css'
+import GsdForm from 'gsd-form'
+import './style.css'
 
 const json = {
   form: {
@@ -56,6 +56,7 @@ const json = {
         name: 'state',
         value: [],
         options: [],
+        useObject: true,
         placeholder: 'Selecione um estado',
         noOptionsMessage: 'Nenhum estado encontrado',
         validate: [
@@ -75,10 +76,10 @@ const json = {
       },
     }
   },
-  recaptcha: {
-    size: 'invisible',
-    sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
-  },
+  // recaptcha: {
+  //   size: 'invisible',
+  //   sitekey: '6LcXrl8UAAAAAI_JQD14ud3VM9IXLTEr02gX_7QL',
+  // },
   showFormState: true,
   honeypot: true,
 }
