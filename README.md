@@ -5,6 +5,7 @@ Formik-based React library to create forms from plain JS objects (or JSON!)
 ## Demo
 
 [Single fields object](https://codesandbox.io/s/zlrmp3o77l)
+
 [Multiple field sets](https://codesandbox.io/s/y3wxvk3lyv)
 
 ## Installing
@@ -131,7 +132,7 @@ parent component.
 
 The projectwas created using `create-react-library`, so it should have its]
 basic structure updated soon. Right now, all the lib content should reside
-inside `src/lib`, everything else can be used when developing or as examples.
+inside `src`, everything else can be used when developing or as examples.
 
 You can start the dev server running:
 
