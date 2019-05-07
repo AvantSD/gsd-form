@@ -28,7 +28,7 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
+    "@babel/runtime": "^7.4.4",
     "@svgr/rollup": "^2.4.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
@@ -60,7 +60,7 @@
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-url": "^1.4.0",
     "vanilla-masker": "^1.2.0",
-    "yup": "^0.25.1"
+    "yup": "^0.27.0"
   },
   "files": [
     "dist"

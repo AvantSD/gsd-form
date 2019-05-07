@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { setLocale } from 'yup/lib/customLocale'
+import { setLocale } from 'yup/lib'
 
 import { ptBR } from '../dictionary/dictionary'
 
