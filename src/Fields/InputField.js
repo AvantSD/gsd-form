@@ -2,27 +2,20 @@ import React from 'react'
 import { Field } from 'formik'
 
 const InputField = props => {
+  const { value, onChanges, item } = props
   const {
-    value,
-    onChanges,
-    item: {
-      component,
-      type,
-      name,
-      disabled,
-      placeholder,
-    }
-  } = props
+    validate,
+    field,
+    fieldClass,
+    format,
+    ...rest,
+  } = item
 
   return (
     <Field
-      disabled={disabled}
-      component={component}
-      type={type}
-      name={name}
+      {...rest}
       onChange={e => onChanges(e.target.value)}
       value={value}
-      placeholder={placeholder}
     />
   )
 }
